@@ -129,8 +129,8 @@ dyn_prompt_set() {
             export PS1="${PS1}${DYN_PROMPT_BRANCH_SEPARATOR}"
             export PS1="${PS1}${branch_trailing}\$ "
         else
-            export PS1="${base_prompt}${branch_trailing}\$ "
-            # export PS1="$(dyn_color 8)[$(dyn_color 10)\u$(dyn_color 8)@$(dyn_color 12)\h$(dyn_color 8)]$(dyn_color reset)\$ "
+            # export PS1="${base_prompt}${branch_trailing}\$ "
+            export PS1="$(dyn_color 8)[$(dyn_color 10)\u$(dyn_color 8)@$(dyn_color 12)\h$(dyn_color 8)]$(dyn_color reset)${branch_trailing}\$ "
         fi
     fi
 }
