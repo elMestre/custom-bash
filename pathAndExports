@@ -1,0 +1,22 @@
+#!/bin/bash
+folders=(
+    /usr/local/bin
+    ~/custom/bin
+)
+
+for folder in "${folders[@]}"
+do
+    if [ -d ${folder} ]; then
+        export PATH=${folder}:$PATH
+    fi
+done
+
+modules=(
+    pathAndExports_Android
+)
+for module in "${modules[@]}"
+do
+    if [ -f ./${module} ]; then
+        . ./${module}
+    fi
+done

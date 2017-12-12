@@ -1,0 +1,23 @@
+export ANDROID_EMULATOR_USE_SYSTEM_LIBS=1
+export ANDROID_HOME=~/Android/android-sdk
+export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
+export CORDOVA_ANDROID_GRADLE_DISTRIBUTION_URL=http\\://services.gradle.org/distributions/gradle-3.3-all.zip
+export JAVA_HOME=/usr/lib/jvm/jdk1.8.0_121
+export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
+
+folders=(
+    $JAVA_HOME/bin
+    ~/Android/android-sdk/platform-tools
+    ~/Android/android-sdk/tools
+    /tools/android/adt-bundle-linux-x86-20140702/sdk/tools/
+    /tools/android/adt-bundle-linux-x86-20140702/sdk/platform-tools/
+    /tools/android/adt-bundle-linux-x86-20140702/sdk/19.1.0
+    /tools/android/adt-bundle-linux-x86-20140702/sdk/build-tools/19.1.0/
+)
+
+for folder in "${folders[@]}"
+do
+    if [ -d ${folder} ]; then
+        export PATH=${folder}:$PATH
+    fi
+done

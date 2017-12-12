@@ -1,0 +1,86 @@
+#!/bin/bash
+
+# set a fancy prompt (non-color, unless we know we "want" color)
+case "$TERM" in
+    xterm-color) color_prompt=yes;;
+esac
+
+# uncomment for a colored prompt, if the terminal has the capability; turned
+# off by default to not distract the user: the focus in a terminal window
+# should be on the output of commands, not on the prompt
+force_C_prompt=yes
+
+if [ -n "$force_C_prompt" ]; then
+    if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
+    # We have color support; assume it's compliant with Ecma-48
+    # (ISO/IEC-6429). (Lack of such support is extremely rare, and such
+    # a case would tend to support setf rather than setaf.)
+        color_prompt=yes
+    else
+        echo "No color support for prompt"
+        color_prompt=
+    fi
+fi
+
+# set variable identifying the chroot you work in (used in the prompt below)
+if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
+    debian_chroot=$(cat /etc/debian_chroot)
+fi
+
+build_prompt()
+{
+
+    apply_color() {
+        if [ "$1" = "reset" ]; then
+            echo -n "\[\e[0m\]"
+        else
+            echo -n "\[\e[${1}m\]"
+        fi
+    }
+
+    colorize()
+    {
+        echo -n $(apply_color $2)$1$(apply_color reset)
+    }
+
+    local light_grey="2"
+    local magenta="31"
+    local green="32"
+    local cyan="34"
+    local orange="33"
+    local italic_magenta="3;"$magenta
+    local italic_green="3;"$green
+    local italic_cyan="3;"$cyan
+    local italic_orange="3;"$orange
+    local magenta_over_medium_grey="6;31;46"
+
+    local _BRACKET_START=$(colorize "[" $light_grey)
+    local _BRACKET_END=$(colorize "]" $light_grey)
+    local _USERNAME=$(colorize "\u" $italic_cyan)
+    local _HOSTNAME=$(colorize "\h" $italic_green)
+    local _CURRENT_PATH="\w"
+    local _CURRENT_DIR="\w"
+    local _PROMPT_END="\$ "
+
+    PS1=$_BRACKET_START$_USERNAME"@"$_HOSTNAME$_BRACKET_END$_CURRENT_PATH$_PROMPT_END
+
+    unset apply_color colorize
+}
+
+if [ "$color_prompt" = yes ]; then
+    # PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+    build_prompt
+else
+    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
+fi
+unset color_prompt force_C_prompt
+
+
+# If this is an xterm set the title to user@host:dir
+case "$TERM" in
+xterm*|rxvt*)
+    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
+    ;;
+*)
+    ;;
+esac
