@@ -15,6 +15,7 @@ modules=(
     pathAndExports
     prompt
     prompt_dynamic
+    proxy
 )
 
 ###############################################
