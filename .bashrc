@@ -1,25 +1,6 @@
-# ~/.bashrc: executed by bash(1) for non-login shells.
-# see /usr/share/doc/bash/examples/startup-files (in the package bash-doc) for examples
-
-###############################################
-###############################################
+# # # # # # # # # # # # # # # # # # # # # # # #
 # SET THIS CONFIG TO YOUR CONVENIENCE:
-
-moduleFolder=~/custom/bash
-
-modules=(
-    aliases
-    bash_completion
-    colorize
-    history
-    pathAndExports
-    prompt
-    prompt_dynamic
-    proxy
-)
-
-###############################################
-###############################################
+# # # # # # # # # # # # # # # # # # # # # # # #
 
 # If not running interactively, don't do anything
 case $- in
@@ -27,19 +8,39 @@ case $- in
       *) return;;
 esac
 
-# check the window size after each command and, if necessary,update the values of LINES and COLUMNS.
-shopt -s checkwinsize
-
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
-if [ -d ${moduleFolder} ]; then
+moduleFolder=$HOME/.bash
+modules=(
+    10_history
+    20_winsize
+    30_prompt_vanilla
+    40_bash_completion
+    50_pathAndExports
+    80_nvm_npm_node
+    90_aliases
+    # 99_colors
+    # 99_prompt
+    # 99_prompt_dynamic
+)
+
+moduleErrors=false
+
+if ! [ -d ${moduleFolder} ]; then
+    echo "moduleFolder not found, please, check config in .bashrc file" >&2
+else
     for module in "${modules[@]}"
     do
-        if [ -f $moduleFolder/${module} ]; then
+        if ! [ -f $moduleFolder/${module} ]; then
+            echo "warn: Module '"${module}"' not found" >&2
+            moduleErrors=true
+        else
             . $moduleFolder/${module}
         fi
     done
-else
-    echo "moduleFolder not found, please, check config in .bashrc file"
+    if [ $moduleErrors = true ] ; then
+        echo >&2
+    fi
 fi
+

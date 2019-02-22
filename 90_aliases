@@ -1,4 +1,7 @@
 #!/bin/bash
+
 # Make aliases usable for sudo
-alias sudo='sudo -HE '
+alias sudo='sudo -HE'
 alias gedit="subl"
+# alias cp='cp -gR'
+# alias mv='mv -g'

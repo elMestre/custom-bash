@@ -1,4 +1,5 @@
 #!/bin/bash
+
 folders=(
     /usr/local/bin
     ~/custom/bin
@@ -12,7 +13,7 @@ do
 done
 
 modules=(
-    pathAndExports_Android
+    50_pathAndExports_Android
 )
 for module in "${modules[@]}"
 do

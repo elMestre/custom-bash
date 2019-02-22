@@ -1,8 +1,11 @@
 #!/bin/bash
+
 # Dynamic prompt!
 # ver: 0.6
 # This script is to be included in the .bashrc file, so no bash header is applied
 #
+
+configFile=$HOME"/custom/bash/99_prompt_dynamic.cfg"
 
 # Command to print a color string
 dyn_color() {
@@ -14,10 +17,9 @@ dyn_color() {
 }
 
 # Check for configuration file to load user defined variables
-if [ -f "$HOME/custom/bash/prompt_dynamic_cfg" ]; then
-    . $HOME/custom/bash/prompt_dynamic_cfg
+if [ -f $configFile ]; then
+    . $configFile
 fi
-
 
 # Command to enable dynamic prompt
 dyn_prompt_on() {
