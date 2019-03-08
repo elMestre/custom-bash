@@ -5,7 +5,7 @@
 ###############################################
 # SET THIS CONFIG TO YOUR CONVENIENCE:
 
-moduleFolder=~/custom/bash
+moduleFolder=".bash"
 
 modules=(
     aliases
