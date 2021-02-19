@@ -10,7 +10,6 @@ Please, note that some scripts or aliases can mess your system
     cd ~
     git clone https://github.com/elMestre/custom-bash.git .bash
     # make a backup of your `~/.bashrc`
-
     mv .bashrc .bashrc.BAK
     # and link the custom `.bashrc` to your home folder
     ln ./.bash/.bashrc .bashrc
