@@ -13,3 +13,5 @@ Please, note that some scripts or aliases can mess your system
     mv .bashrc .bashrc.BAK
     # and link the custom `.bashrc` to your home folder
     ln ./.bash/.bashrc .bashrc
+    # restart bash
+    # exec "$BASH"
