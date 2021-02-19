@@ -5,9 +5,12 @@ My bash customization, intended to be used together with custom-scripts
 Please, note that some scripts or aliases can mess your system
 
 ## Installation suggestion:
-git clone or download inside `~/custom/custom-bash`
 
-make a backup of your `~/.bashrc`
+    # git clone or download inside `~/.bash`
+    cd ~
+    git clone https://github.com/elMestre/custom-bash.git .bash
+    # make a backup of your `~/.bashrc`
 
-and link the custom `.bashrc` to your home folder
-
+    mv .bashrc .bashrc.BAK
+    # and link the custom `.bashrc` to your home folder
+    ln ./.bash/.bashrc .bashrc
